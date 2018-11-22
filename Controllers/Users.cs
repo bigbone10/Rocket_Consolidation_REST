@@ -13,8 +13,8 @@ namespace Rocket.Controllers {
     [Route ("api/users")]
     [ApiController]
     public class UsersController : ControllerBase {
-        private readonly MySql_appContext _context;
-        public UsersController (MySql_appContext context) {
+        private readonly domContext _context;
+        public UsersController (domContext context) {
             _context = context;
         }
 

@@ -9,8 +9,8 @@ namespace Rocket.Controllers {
     [Route ("api/leads")]
     [ApiController]
     public class LeadsController : ControllerBase {
-        private readonly MySql_appContext _context;
-        public LeadsController (MySql_appContext context) {
+        private readonly domContext _context;
+        public LeadsController (domContext context) {
             _context = context;
         }
 

@@ -8,9 +8,9 @@ namespace Rocket.Controllers {
     [Route ("api/columns")]
     [ApiController]
     public class ColumnsController : ControllerBase {
-        private readonly MySql_appContext _context;
+        private readonly domContext _context;
 
-        public ColumnsController (MySql_appContext context) {
+        public ColumnsController (domContext context) {
             _context = context;
         }
 

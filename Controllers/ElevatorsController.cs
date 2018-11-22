@@ -9,9 +9,9 @@ namespace Rocket.Controllers {
     [Route ("api/elevators")]
     [ApiController]
     public class ElevatorsControllers : ControllerBase {
-        private readonly MySql_appContext _context;
+        private readonly domContext _context;
 
-        public ElevatorsControllers (MySql_appContext context) {
+        public ElevatorsControllers (domContext context) {
             _context = context;
         }
 

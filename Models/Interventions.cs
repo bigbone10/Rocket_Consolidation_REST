@@ -13,10 +13,10 @@ namespace Rocket.Models
         public int? BatteryId { get; set; }
         public int? ColumnId { get; set; }
         public int? ElevatorId { get; set; }
-        public DateTime? InterventionStart { get; set; }
-        public DateTime? InterventionEnd { get; set; }
         public string InterventionResult { get; set; }
         public string InterventionReport { get; set; }
         public string InterventionStatus { get; set; }
+        public DateTime? InterventionStart { get; set; }
+        public DateTime? InterventionEnd { get; set; }
     }
 }

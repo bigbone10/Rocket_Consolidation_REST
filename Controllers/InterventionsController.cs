@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Rocket.Models;
+using System;
 
 namespace Rocket.Controllers {
 
@@ -15,16 +16,68 @@ namespace Rocket.Controllers {
             _context = context;
         }
 
-        // GET api/Interventions/5
-        [HttpGet ("{id}", Name = "GetInterventions")]
-        public ActionResult GetById (string InterventionStatus, long id) {
-            var item = _context.Interventions.Find (id);
-            if (item == null) {
+        // GET api/Interventions
+        [HttpGet]
+        public ActionResult<List<Interventions>> GetAll () {
+            var list = _context.Interventions.ToList ();
+            if (list == null) {
                 return NotFound ("Not Found");
             }
-            var json = new JObject ();
-            json["status"] = item.InterventionStatus;
-            return Content (json.ToString (), "application/json");
+            List<Interventions> list_pending = new List<Interventions> ();
+
+            foreach (var i in list) {
+
+                if (i.InterventionStatus == "Pending") {
+                    list_pending.Add (i);
+                }
+            }
+            return list_pending;
+        }
+
+        // PUT api/Interventions/InProgress
+        [HttpPut ("InProgress/{id}", Name = "InterventionProgress")]
+        public string UpdateIntervention (long id) {
+
+            var intervention = _context.Interventions.Find (id);
+            if (intervention == null) {
+                
+                return "Enter a valid intervention id.";
+            }
+            if (intervention.InterventionStatus != "Pending") {
+                
+                return "In Progress";
+            } 
+            else {
+                intervention.InterventionStatus = "In Progress";
+                intervention.InterventionStart = DateTime.Now;
+                _context.Interventions.Update(intervention);
+                _context.SaveChanges ();
+                
+                return "In Progress";
+            }
+        }
+
+        // PUT api/Interventions/Completed
+        [HttpPut ("Completed/{id}", Name = "InterventionComplete")]
+        public string CompleteIntervention (long id) {
+
+            var intervention = _context.Interventions.Find (id);
+            if (intervention == null) {
+                
+                return "Enter a valid intervention id.";
+            }
+            if (intervention.InterventionStatus != "In Progress") {
+                
+                return "Completed";
+            } 
+            else {
+                intervention.InterventionStatus = "Completed";
+                intervention.InterventionEnd = DateTime.Now;
+                _context.Interventions.Update(intervention);
+                _context.SaveChanges ();
+                
+                return "Completed";
+            }
         }
     }
 }

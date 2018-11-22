@@ -6,9 +6,9 @@ namespace Rocket.Controllers {
     [Route ("api/batteries")]
     [ApiController]
     public class BatteriesController : ControllerBase {
-        private readonly MySql_appContext _context;
+        private readonly domContext _context;
 
-        public BatteriesController (MySql_appContext context) {
+        public BatteriesController (domContext context) {
             _context = context;
         }
 
