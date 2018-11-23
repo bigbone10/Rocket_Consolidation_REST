@@ -45,7 +45,7 @@ namespace Rocket.Controllers {
             }
             if (intervention.InterventionStatus != "Pending") {
                 
-                return "In Progress";
+                return "Can only update 'Pending' interventions.";
             } 
             else {
                 intervention.InterventionStatus = "In Progress";
@@ -68,10 +68,11 @@ namespace Rocket.Controllers {
             }
             if (intervention.InterventionStatus != "In Progress") {
                 
-                return "Completed";
+                return "Can only complete 'In Progress' interventions.";
             } 
             else {
                 intervention.InterventionStatus = "Completed";
+                intervention.InterventionResult = "Completed";
                 intervention.InterventionEnd = DateTime.Now;
                 _context.Interventions.Update(intervention);
                 _context.SaveChanges ();
